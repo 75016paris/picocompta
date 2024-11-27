@@ -1,0 +1,100 @@
+Python 3.10.15
+
+
+Package                   Version
+------------------------- ---------
+altgraph                  0.17.4
+certifi                   2024.8.30
+chardet                   5.2.0
+charset-normalizer        3.4.0
+docutils                  0.21.2
+idna                      3.10
+Kivy                      2.3.0
+Kivy-Garden               0.1.5
+macholib                  1.16.3
+packaging                 24.2
+pillow                    11.0.0
+pip                       24.3.1
+Pygments                  2.18.0
+pyinstaller               6.11.1
+pyinstaller-hooks-contrib 2024.10
+reportlab                 4.2.5
+requests                  2.32.3
+setuptools                74.1.2
+urllib3                   2.2.3
+wheel                     0.44.0
+
+
+
+from PyInstaller.utils.hooks import collect_submodules, collect_data_files
+
+# Collecter les sous-modules nécessaires pour Kivy et ReportLab
+hidden_imports = [
+    'kivy.app',
+    'kivy.uix',
+    'kivy.lang',
+    'kivy.graphics',
+    'kivy.properties',
+    'kivy.clock',
+    'reportlab.lib',
+    'reportlab.platypus',
+    'reportlab.pdfgen',
+]
+
+# Collecter les fichiers de données nécessaires
+kivy_data_files = collect_data_files('kivy')
+reportlab_data_files = collect_data_files('reportlab')
+
+# Ajouter vos fichiers spécifiques
+custom_data_files = [
+    ('assets', 'assets'),             # Dossier contenant vos fichiers de style ou images
+    ('db', 'db'),                     # Dossier contenant vos bases de données
+    ('icon.icns', '.'),               # Icône de l'application
+    ('pages', 'pages'),               # Fichiers KV et Python dans `pages`
+]
+
+a = Analysis(
+    ['main.py'],                      # Point d'entrée principal
+    pathex=['.'],                     # Chemin d'accès à vos sources
+    binaries=[],                      # Ajouter des bibliothèques binaires si nécessaire
+    datas=kivy_data_files + reportlab_data_files + custom_data_files,  # Inclure toutes les données
+    hiddenimports=hidden_imports,     # Inclure les imports cachés
+    hookspath=[],                     # Ajouter vos hooks personnalisés ici
+    runtime_hooks=[],
+    excludes=[],                      # Exclure des modules inutiles si nécessaire
+    noarchive=False,
+    optimize=0,
+)
+
+pyz = PYZ(a.pure)
+
+exe = EXE(
+    pyz,
+    a.scripts,
+    [],
+    exclude_binaries=True,
+    name='PicoCompta',                # Nom de l'exécutable
+    debug=False,
+    bootloader_ignore_signals=False,
+    strip=False,
+    upx=True,
+    console=False,                    # True si vous voulez une console
+    icon='icon.icns',                 # Icône pour l'exécutable
+)
+
+coll = COLLECT(
+    exe,
+    a.binaries,                       # Inclure les binaires nécessaires
+    a.datas,                          # Inclure les données nécessaires
+    strip=False,
+    upx=True,
+    upx_exclude=[],
+    name='PicoCompta',
+)
+
+app = BUNDLE(
+    coll,
+    name='PicoCompta.app',
+    icon='icon.icns',
+    bundle_identifier='com.example.PicoCompta',  # Remplacez par un identifiant unique
+)

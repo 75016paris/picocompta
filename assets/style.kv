@@ -1,0 +1,275 @@
+#:kivy 2.2.1
+#:import Factory kivy.factory.Factory
+
+#:set primary_text_color 0, 0, 0, 1  # Noir pour le texte
+#:set window_bg_color 0.85, 0.85, 0.85, 1  # Gris clair pour le fond de la fenêtre
+#:set border_color 0.6, 0.6, 0.6, 1  # Gris moyen pour les bordures
+#:set hint_text_color 0.6, 0.6, 0.6, 1  # Couleur pour le hint_text
+#:set scroll_bg_color 0.85, 0.85, 0.85, 1  # Couleur de fond gris clair pour ScrollView
+#:set scroll_border_color 0.6, 0.6, 0.6, 1  # Couleur de la bordure de ScrollView
+#:set popup_title_bg_color 0.7, 0.7, 0.7, 1  # Couleur foncée pour la barre de titre du popup
+
+<Screen>:
+    WindowFrame:
+        orientation: 'vertical'
+        padding: 20
+        spacing: 10
+
+<DropDown>:
+    background_color: 1, 1, 1, 1  # Set dropdown background to white
+    border_color: border_color
+    size_hint_y: None
+    height: 150  # Fixed height for the dropdown
+    canvas.before:
+        Color:
+            rgba: 0, 0, 0, 1  # Black border for the dropdown
+        Line:
+            width: 1.2
+            rectangle: self.x, self.y, self.width, self.height
+
+<CheckBox>:
+    color: primary_text_color  # Couleur du CheckBox
+    active_color: primary_text_color  # Couleur lorsque le CheckBox est actif
+    background_color: window_bg_color  # Fond du CheckBox
+
+<MacStylePopup@Popup>:
+    background: ''
+    title_size: 14
+    title_align: 'center'
+    separator_height: 2
+    title_color: [0, 0, 0, 1]
+    size_hint: None, None
+    size: 400, 200
+    auto_dismiss: False
+    
+    canvas.before:
+        Color:
+            rgba: window_bg_color
+        Rectangle:
+            pos: self.pos
+            size: self.size
+        
+        Color:
+            rgba: popup_title_bg_color
+        Rectangle:
+            pos: self.pos[0], self.pos[1] + self.height - 40
+            size: self.width, 40
+        
+        Color:
+            rgba: border_color
+        Line:
+            width: 2
+            rectangle: self.x, self.y, self.width, self.height
+        
+        Color:
+            rgba: border_color
+        Line:
+            points: [self.x, self.y + self.height - 40, self.x + self.width, self.y + self.height - 40]
+            width: 1
+
+<MessagePopup@MacStylePopup>:
+    title: 'Information'
+
+    BoxLayout:
+        orientation: 'vertical'
+        padding: 10
+        spacing: 10
+
+        Label:
+            text: root.message if hasattr(root, 'message') else ''
+            text_size: self.width - 20, None
+            size_hint_y: 0.7
+            halign: 'center'
+            valign: 'middle'
+        
+        OptionButton:
+            text: 'OK'
+            size_hint: None, None
+            size: 100, 30
+            pos_hint: {'center_x': 0.5}
+            on_release: root.dismiss()
+
+<Popup@Popup>:
+    background: ''
+    title_size: 14
+    title_align: 'center'
+    separator_height: 2
+    size_hint: None, None
+    size: 400, 200
+    
+    canvas.before:
+        Color:
+            rgba: window_bg_color
+        Rectangle:
+            pos: self.pos
+            size: self.size
+        
+        Color:
+            rgba: popup_title_bg_color
+        Rectangle:
+            pos: self.pos[0], self.pos[1] + self.height - 40
+            size: self.width, 40
+        
+        Color:
+            rgba: border_color
+        Line:
+            width: 2
+            rectangle: self.x, self.y, self.width, self.height
+        
+        Color:
+            rgba: border_color
+        Line:
+            points: [self.x, self.y + self.height - 40, self.x + self.width, self.y + self.height - 40]
+            width: 1
+    
+    title_color: [1, 1, 1, 1]
+
+<ScrollView>:
+    canvas.before:
+        Color:
+            rgba: scroll_bg_color
+        Rectangle:
+            pos: self.pos
+            size: self.size
+        Color:
+            rgba: scroll_border_color
+        Line:
+            width: 1.2
+            rectangle: self.x, self.y, self.width, self.height
+
+<Label>:
+    color: primary_text_color
+    font_size: 16
+
+<Button>:
+    font_size: 14
+    color: primary_text_color
+    background_normal: ''
+    background_color: window_bg_color
+    border: (2, 2, 2, 2)
+    size_hint_y: None  # Ensure fixed height
+    height: 30  # Match spinner height
+    canvas.before:
+        Color:
+            rgba: border_color
+        Line:
+            width: 1.2
+            rectangle: self.x, self.y, self.width, self.height
+
+<TextInput>:
+    background_normal: ''
+    background_color: 1, 1, 1, 1  # Fond blanc
+    foreground_color: (0, 0, 0, 1) if self.text else hint_text_color  # Noir si texte saisi, gris sinon
+    hint_text_color: hint_text_color  # Le hint reste en gris
+    font_size: 14
+    padding: [5, 5]
+    canvas.before:
+        Color:
+            rgba: border_color
+        Line:
+            width: 0.8  # Reduced thickness for input borders
+            rectangle: self.x, self.y, self.width, self.height
+
+<BoxLayout>:
+    padding: 10
+    spacing: 5
+
+# Styles pour des composants de fenêtre
+<WindowFrame@BoxLayout>:
+    canvas.before:
+        Color:
+            rgba: window_bg_color  # Fond de la fenêtre en gris clair
+        Rectangle:
+            pos: self.pos
+            size: self.size
+        Color:
+            rgba: border_color  # Bordure de la fenêtre
+        Line:
+            width: 2
+            rectangle: self.x, self.y, self.width, self.height
+
+# Exemple de classe pour un écran ou une page principale
+<MainPage>:
+    WindowFrame:
+        orientation: 'vertical'
+        Label:
+            text: "Macintosh HD"
+            font_size: 18
+            bold: True
+            color: primary_text_color
+            size_hint_y: None
+            height: 30
+        BoxLayout:
+            orientation: 'horizontal'
+            padding: [10, 10]
+            Label:
+                text: "5 items"
+            Label:
+                text: "4.9 MB in disk"
+            Label:
+                text: "508.2 MB available"
+            Button:
+                text: "Close"
+                on_release: app.stop()
+
+# Boutons personnalisés pour les options, inspirés du style Mac OS Classic
+<OptionButton@Button>:
+    font_size: 12
+    background_color: 0.9, 0.9, 0.9, 1
+    color: primary_text_color
+    border: (1, 1, 1, 1)
+    size_hint: None, None
+    size: 80, 25
+
+<SpinnerOption>:
+    background_color: 1, 1, 1, 1  # Set each option background to white
+    color: primary_text_color
+    font_size: 14
+    padding: [5, 5]
+    canvas.before:
+        Color:
+            rgba: 0, 0, 0, 1  # Black border around each option
+        Line:
+            width: 1.2
+            rectangle: self.x, self.y, self.width, self.height
+
+
+<Spinner>:
+    font_size: 14
+    color: primary_text_color
+    background_normal: ''
+    border: (2, 2, 2, 2)
+    canvas.before:
+        Color:
+            rgba: 0, 0, 0, 1  # Black border for spinner
+        Line:
+            width: 1.2
+            rectangle: self.x, self.y, self.width, self.height
+
+# Style pour les conteneurs de formulaire
+<FormLayout@BoxLayout>:
+    orientation: 'horizontal'
+    size_hint_y: None
+    height: 50
+    spacing: 10
+    padding: 5
+
+# Style pour les labels de formulaire
+<FormLabel@Label>:
+    size_hint_x: 0.3
+    text_size: self.size
+    halign: 'right'
+    valign: 'middle'
+
+# Style pour les champs de formulaire
+<FormInput@TextInput>:
+    size_hint_x: 0.7
+    multiline: False
+
+# Style pour les sections de formulaire
+<FormSection@BoxLayout>:
+    orientation: 'vertical'
+    size_hint_y: None
+    height: self.minimum_height
+    padding: 10
+    spacing: 10

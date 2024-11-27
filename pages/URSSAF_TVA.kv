@@ -1,0 +1,216 @@
+<URSSAF_TVAPage>:
+    BoxLayout:
+        orientation: 'vertical'
+        spacing: 10
+        padding: 10
+
+        # Barre d'année
+        BoxLayout:
+            size_hint_y: None
+            height: '40dp'
+            Button:
+                text: '[b]<[/b]'
+                size_hint_x: None
+                width: '40dp'
+                markup: True 
+                on_release: root.change_year(-1)
+            Label:
+                text: f"[b]Année : {root.selected_year}[/b]"
+                markup: True 
+            Button:
+                text: '[b]>[/b]'
+                size_hint_x: None
+                width: '40dp'
+                markup: True 
+                on_release: root.change_year(1)
+
+        # Légende
+        GridLayout:
+            cols: 4
+            size_hint_y: None
+            height: '30dp'
+            spacing: 5
+            BoxLayout:
+                canvas.before:
+                    Color:
+                        rgb: 0.7, 0.7, 1
+                    Rectangle:
+                        pos: self.pos
+                        size: self.size
+                Label:
+                    text: 'Période actuelle'
+            BoxLayout:
+                canvas.before:
+                    Color:
+                        rgb: 1, 0.7, 0.7
+                    Rectangle:
+                        pos: self.pos
+                        size: self.size
+                Label:
+                    text: 'À déclarer'
+            BoxLayout:
+                canvas.before:
+                    Color:
+                        rgb: 0.7, 1, 0.7
+                    Rectangle:
+                        pos: self.pos
+                        size: self.size
+                Label:
+                    text: 'Déjà déclaré'
+            BoxLayout:
+                canvas.before:
+                    Color:
+                        rgb: 0.8, 0.8, 0.8
+                    Rectangle:
+                        pos: self.pos
+                        size: self.size
+                Label:
+                    text: 'Rien à Déclaré'
+
+        # Scrollable content for URSSAF and TVA data
+        ScrollView:
+            BoxLayout:
+                orientation: 'vertical'
+                size_hint_y: None
+                height: self.minimum_height
+                spacing: 20
+                padding: 10
+
+                # URSSAF section
+                BoxLayout:
+                    orientation: 'vertical'
+                    size_hint_y: None
+                    height: self.minimum_height
+                    spacing: 10
+
+                    Label:
+                        text: "URSSAF"
+                        font_size: 20
+                        bold: True
+                        size_hint_y: None
+                        height: 30
+
+                    # Header for URSSAF data
+                    GridLayout:
+                        cols: 5
+                        size_hint_y: None
+                        height: 30
+                        padding: [20, 0]
+                        
+                        Label:
+                            text: "Période"
+                            size_hint_x: 0.3
+                        Label:
+                            text: "nb de Factures"
+                            size_hint_x: 0.2
+                        Label:
+                            text: "Montant HT"
+                            size_hint_x: 0.2
+                        Label:
+                            text: "CHARGE"
+                            size_hint_x: 0.2
+                        Label:
+                            text: "Voir les détails"
+                            size_hint_x: 0.1
+
+                    # Container for URSSAF data rows
+                    GridLayout:
+                        id: urssaf_container
+                        cols: 1
+                        size_hint_y: None
+                        height: self.minimum_height
+                        spacing: 5
+
+                # TVA section
+                BoxLayout:
+                    orientation: 'vertical'
+                    size_hint_y: None
+                    height: self.minimum_height
+                    spacing: 10
+
+                    Label:
+                        text: "TVA"
+                        font_size: 20
+                        bold: True
+                        size_hint_y: None
+                        height: 30
+
+                    # Header for TVA data
+                    GridLayout:
+                        cols: 5
+                        size_hint_y: None
+                        height: 30
+                        padding: [20, 0]
+                        
+                        Label:
+                            text: "Période"
+                            size_hint_x: 0.3
+                        Label:
+                            text: "nb de Factures"
+                            size_hint_x: 0.2
+                        Label:
+                            text: "Montant HT"
+                            size_hint_x: 0.2
+                        Label:
+                            text: "Montant TVA"
+                            size_hint_x: 0.2
+                        Label:
+                            text: "Voir le détails"
+                            size_hint_x: 0.1
+
+                    # Container for TVA data rows
+                    GridLayout:
+                        id: tva_container
+                        cols: 1
+                        size_hint_y: None
+                        height: self.minimum_height
+                        spacing: 5
+
+        # Return button
+        BoxLayout:
+            size_hint_y: None
+            height: 50
+            padding: 10
+
+            Button:
+                text: "Retour"
+                size_hint_x: 1
+                on_press: root.go_home()
+
+<PeriodRow>:
+    orientation: 'horizontal'
+    size_hint_y: None
+    height: 40
+    padding: [20, 0]
+    spacing: 5
+
+    canvas.before:
+        Color:
+            rgb: self.get_background_color()
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+    Label:
+        text: root.period_label
+        size_hint_x: 0.3
+
+    Label:
+        text: str(root.nb_factures)
+        size_hint_x: 0.2
+
+    Label:
+        text: f"{root.total_ht:.2f} €"
+        size_hint_x: 0.2
+
+    Label:
+        text: f"{root.total_charge:.2f} €" if hasattr(root, 'total_charge') else f"{root.total_tva:.2f} €"
+        size_hint_x: 0.2
+
+    Button:
+        text: "Détails"
+        size_hint_x: 0.1
+        size_hint_y: None
+        height: 30  # Adjust button height to fit within row
+        pos_hint: {'center_y': 0.5}  # Vertically center the button within the row
+        on_release: root.details_callback()

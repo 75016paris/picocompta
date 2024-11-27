@@ -1,0 +1,392 @@
+<DemarragePage>:
+    WindowFrame:
+        orientation: 'vertical'
+        padding: 10
+        spacing: 10
+
+        Label:
+            text: 'Bienvenue sur PicoCompta'
+            font_size: 24
+            bold: True
+            size_hint_y: None
+            height: 40
+            halign: 'center'
+
+        Label:
+            text: 'La comptabilité pour les Auto-entrepreneur'
+            font_size: 16
+            size_hint_y: None
+            height: 20
+            halign: 'center'
+
+        ScrollView:
+            size_hint: (1, 1)
+            bar_width: 10
+            do_scroll_x: False
+
+            BoxLayout:
+                orientation: 'vertical'
+                padding: 10  # Reduced padding to minimize space around sections
+                spacing: 10  # Reduced spacing between sections to tighten layout
+                size_hint_y: None
+                height: self.minimum_height
+
+                # Section 1: Statistiques clients
+                BoxLayout:
+                    orientation: 'vertical'
+                    padding: [10, 10]
+                    spacing: 5
+                    size_hint_y: None
+                    height: 160  # Adjusted height for compact layout
+                    canvas.before:
+                        Color:
+                            rgba: 0.9, 0.9, 0.9, 1  # Light gray background
+                        Rectangle:
+                            pos: self.pos
+                            size: self.size
+                        Color:
+                            rgba: 0, 0, 0, 1  # Black border
+                        Line:
+                            rectangle: (self.x, self.y, self.width, self.height)
+                            width: 1
+
+                    # Title for Section 1
+                    Label:
+                        text: 'Statistiques'
+                        font_size: 18
+                        bold: True
+                        size_hint_y: None
+                        height: 30
+
+                    Label:
+                        id: best_client_trimestre
+                        text: "Meilleur client (trimestre) : Chargement..."
+                        font_size: 16
+                        size_hint_y: None
+                        height: 30
+
+                    Label:
+                        id: best_client_historique
+                        text: "Meilleur client (historique) : Chargement..."
+                        font_size: 16
+                        size_hint_y: None
+                        height: 30
+
+                    Label:
+                        id: worst_payer
+                        text: "Client le plus lent à vous payer : Chargement..."
+                        font_size: 16
+                        size_hint_y: None
+                        height: 30
+
+                # Section 2: Suivi des plafonds Auto-Entrepreneur
+                BoxLayout:
+                    orientation: 'vertical'
+                    padding: [10, 10]  # Padding at the top and bottom for consistency
+                    spacing: 10
+                    size_hint_y: None
+                    height: 270  # Adjusted height to fit all content
+                    canvas.before:
+                        Color:
+                            rgba: 0.9, 0.9, 0.9, 1  # Light gray background
+                        Rectangle:
+                            pos: self.pos
+                            size: self.size
+                        Color:
+                            rgba: 0, 0, 0, 1  # Black border
+                        Line:
+                            rectangle: (self.x, self.y, self.width, self.height)
+                            width: 1
+
+                    Label:
+                        text: 'Suivi des plafonds Auto-Entrepreneur'
+                        font_size: 18
+                        bold: True
+                        size_hint_y: None
+                        height: 30
+                        valign: 'top'
+
+                    # BIC Marchandise
+                    BoxLayout:
+                        orientation: 'horizontal'
+                        size_hint_y: None
+                        height: 40
+                        spacing: 5
+
+                        Label:
+                            text: 'BIC Marchandise'
+                            font_size: 14
+                            size_hint_x: 0.6
+                            halign: 'left'
+
+                        ProgressBar:
+                            value: root.progress_bic_marchandise
+                            max: 100
+                            size_hint_x: 0.8
+                            height: 5
+                            background_color: 0.3, 0.3, 0.3, 1
+                            canvas.before:
+                                Color:
+                                    rgba: 0.9, 0.9, 0.9, 1
+                                Rectangle:
+                                    pos: self.pos
+                                    size: self.size
+                            canvas.after:
+                                Color:
+                                    rgba: 0.2, 0.2, 0.2, 1
+                                Rectangle:
+                                    pos: self.pos
+                                    size: (self.width * (self.value / self.max), self.height)
+                                Color:
+                                    rgba: 0, 0, 0, 1
+                                Line:
+                                    rectangle: (self.x, self.y, self.width, self.height)
+                                    width: 1
+
+                        Label:
+                            id: label_bic_marchandise
+                            text: '0€ / 188 700€'
+                            font_size: 14
+                            size_hint_x: 0.4
+                            halign: 'right'
+
+                    # BIC et BNC Service
+                    BoxLayout:
+                        orientation: 'horizontal'
+                        size_hint_y: None
+                        height: 40
+                        spacing: 5
+
+                        Label:
+                            text: 'BIC et BNC Service'
+                            font_size: 14
+                            size_hint_x: 0.6
+                            halign: 'left'
+
+                        ProgressBar:
+                            value: root.progress_services
+                            max: 100
+                            size_hint_x: 0.8
+                            height: 5
+                            background_color: 0.3, 0.3, 0.3, 1
+                            canvas.before:
+                                Color:
+                                    rgba: 0.9, 0.9, 0.9, 1
+                                Rectangle:
+                                    pos: self.pos
+                                    size: self.size
+                            canvas.after:
+                                Color:
+                                    rgba: 0.2, 0.2, 0.2, 1
+                                Rectangle:
+                                    pos: self.pos
+                                    size: (self.width * (self.value / self.max), self.height)
+                                Color:
+                                    rgba: 0, 0, 0, 1
+                                Line:
+                                    rectangle: (self.x, self.y, self.width, self.height)
+                                    width: 1
+
+                        Label:
+                            id: label_services
+                            text: '0€ / 77 700€'
+                            font_size: 14
+                            size_hint_x: 0.4
+                            halign: 'right'
+
+                    # Mixité (Activité Mixte) progress bar
+                    BoxLayout:
+                        orientation: 'horizontal'
+                        size_hint_y: None
+                        height: 40
+                        spacing: 5
+
+                        Label:
+                            text: 'Mixité (Activité Mixte)'
+                            font_size: 14
+                            size_hint_x: 0.6
+                            halign: 'left'
+
+                        ProgressBar:
+                            id: mixed_activity_bar
+                            value: root.progress_mixed_activity
+                            max: 100
+                            size_hint_x: 0.8
+                            height: 5
+                            background_color: 0.3, 0.3, 0.3, 1
+                            canvas.before:
+                                Color:
+                                    rgba: 0.9, 0.9, 0.9, 1
+                                Rectangle:
+                                    pos: self.pos
+                                    size: self.size
+                            canvas.after:
+                                Color:
+                                    rgba: 0.2, 0.2, 0.2, 1
+                                Rectangle:
+                                    pos: self.pos
+                                    size: (self.width * (self.value / self.max), self.height)
+                                Color:
+                                    rgba: 0, 0, 0, 1
+                                Line:
+                                    rectangle: (self.x, self.y, self.width, self.height)
+                                    width: 1
+
+                        Label:
+                            id: label_mixed_activity
+                            text: '0€ / 188 700€'  # Initial text for the mixed activity progress
+                            font_size: 14
+                            size_hint_x: 0.4
+                            halign: 'right'
+
+                    # Informational Text for Section 2
+                    Label:
+                        text: "Si vous dépassez l'un de ces seuils, vous passez au régime classique de l’entreprise individuelle.\nPicoCompta n'est plus adaptée pour vous."
+                        font_size: 14
+                        italic: True
+                        size_hint_y: None
+                        height: 40
+                        halign: 'center'
+                        valign: 'middle'
+
+                # Section 3: Suivi des seuils de TVA
+                BoxLayout:
+                    orientation: 'vertical'
+                    padding: [10, 10]  # Padding at the top and bottom for consistency
+                    spacing: 5
+                    size_hint_y: None
+                    height: 240
+                    canvas.before:
+                        Color:
+                            rgba: 0.9, 0.9, 0.9, 1
+                        Rectangle:
+                            pos: self.pos
+                            size: self.size
+                        Color:
+                            rgba: 0, 0, 0, 1
+                        Line:
+                            rectangle: (self.x, self.y, self.width, self.height)
+                            width: 1
+
+                    Label:
+                        text: 'Suivi des seuils de TVA'
+                        font_size: 18
+                        bold: True
+                        size_hint_y: None
+                        height: 30
+
+                    # TVA Vente
+                    BoxLayout:
+                        orientation: 'horizontal'
+                        size_hint_y: None
+                        height: 40
+                        spacing: 5
+
+                        Label:
+                            text: 'TVA Vente'
+                            font_size: 14
+                            size_hint_x: 0.6
+                            halign: 'left'
+
+                        ProgressBar:
+                            value: root.progress_tva_vente
+                            max: 100
+                            size_hint_x: 0.8
+                            height: 5
+                            background_color: 0.3, 0.3, 0.3, 1
+                            canvas.before:
+                                Color:
+                                    rgba: 0.9, 0.9, 0.9, 1
+                                Rectangle:
+                                    pos: self.pos
+                                    size: self.size
+                            canvas.after:
+                                Color:
+                                    rgba: 0.2, 0.2, 0.2, 1
+                                Rectangle:
+                                    pos: self.pos
+                                    size: (self.width * (self.value / self.max), self.height)
+                                Color:
+                                    rgba: 0, 0, 0, 1
+                                Line:
+                                    rectangle: (self.x, self.y, self.width, self.height)
+                                    width: 1
+
+                        Label:
+                            id: label_tva_vente
+                            text: '50,100.00€ / 93,500€'
+                            font_size: 14
+                            size_hint_x: 0.4
+                            halign: 'right'
+
+                    # TVA Services
+                    BoxLayout:
+                        orientation: 'horizontal'
+                        size_hint_y: None
+                        height: 40
+                        spacing: 5
+
+                        Label:
+                            text: 'TVA Services'
+                            font_size: 14
+                            size_hint_x: 0.6
+                            halign: 'left'
+
+                        ProgressBar:
+                            value: root.progress_tva_service
+                            max: 100
+                            size_hint_x: 0.8
+                            height: 5
+                            background_color: 0.3, 0.3, 0.3, 1
+                            canvas.before:
+                                Color:
+                                    rgba: 0.9, 0.9, 0.9, 1
+                                Rectangle:
+                                    pos: self.pos
+                                    size: self.size
+                            canvas.after:
+                                Color:
+                                    rgba: 0.2, 0.2, 0.2, 1
+                                Rectangle:
+                                    pos: self.pos
+                                    size: (self.width * (self.value / self.max), self.height)
+                                Color:
+                                    rgba: 0, 0, 0, 1
+                                Line:
+                                    rectangle: (self.x, self.y, self.width, self.height)
+                                    width: 1
+
+                        Label:
+                            id: label_tva_service
+                            text: '100.00€ / 39,100€'
+                            font_size: 14
+                            size_hint_x: 0.4
+                            halign: 'right'
+
+                    # Informational Text for Section 3
+                    Label:
+                        text: "Si vous dépassez l'un de ces seuils, vous devrez facturer la TVA à vos clients et vous serez redevable de la TVA.\n Vous devrez obligatoirement contacter le service des impôts des entreprises (SIE) \n dans le but d’obtenir un numéro de TVA intracommunautaire et de sélectionner un régime de TVA."
+                        font_size: 14
+                        italic: True
+                        size_hint_y: None
+                        height: 60
+                        halign: 'center'
+                        valign: 'middle'
+
+                Widget:
+                    size_hint_y: 0.1
+
+        # Centered Button with equal padding
+        BoxLayout:
+            orientation: 'vertical'
+            size_hint_y: None
+            height: 80  # Combined padding and button height
+            padding: [0, 20]  # 20 pixels of padding above and below the button
+
+            OptionButton:
+                text: 'Continuer...'
+                font_size: 14
+                size_hint: None, None
+                size: 180, 40
+                pos_hint: {'center_x': 0.5}
+                on_release: root.continue_to_next_page()

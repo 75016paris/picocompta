@@ -1,0 +1,102 @@
+<NouvelleFacturePage>:
+    WindowFrame:
+        orientation: 'vertical'
+        padding: 20
+        spacing: 10
+
+        Label:
+            id: error_label
+            text: ""
+            color: 1, 0, 0, 1
+            size_hint_y: None
+            height: 30
+
+        FormLayout:
+            FormLabel:
+                text: 'Client:'
+            Spinner:
+                id: client_spinner
+                text: 'Sélectionner un client'
+                values: []
+
+        FormLayout:
+            FormLabel:
+                text: 'Type d\'activité:'
+            Spinner:
+                id: service_type_spinner
+                text: root.service_type  # Lier à la propriété
+                values: ['BIC marchandise', 'BIC service', 'BNC']
+                on_text: root.on_service_type_change(self.text)
+
+        FormLayout:
+            FormLabel:
+                text: 'Description:'
+            FormInput:
+                id: mission_input
+                hint_text: 'Description du service ou de la marchandise'
+
+        FormLayout:
+            FormLabel:
+                text: 'TVA:'
+            Spinner:
+                id: tva_spinner
+                text: 'Sans TVA'  # Sera mis à jour dans load_initial_settings
+                values: ['Avec TVA', 'Sans TVA']
+                on_text: root.adjust_tva_rate()
+
+        FormLayout:
+            FormLabel:
+                text: 'Taux TVA (%):'
+            FormInput:
+                id: taux_tva_input
+                text: '0.0'
+                disabled: not root.tva_active
+
+        FormLayout:
+            FormLabel:
+                text: 'Prix HT:'
+            FormInput:
+                id: prix_ht_input
+                hint_text: 'Prix HT'
+                on_text: root.calculate_tva(*args)
+
+        BoxLayout:
+            orientation: 'vertical'
+            size_hint_y: None
+            height: 80
+            Label:
+                id: tva_label
+                text: 'TVA: 0.00 €'
+            Label:
+                id: total_label
+                text: 'Total TTC: 0.00 €'
+
+        Widget:
+            size_hint_y: 1
+
+        BoxLayout:
+            size_hint_y: None
+            height: 50
+            spacing: 20
+            Button:
+                text: 'Générer PDF'
+                size_hint_x: 0.5
+                on_press: root.generate_pdf()
+            Button:
+                text: 'Retour'
+                size_hint_x: 0.5
+                on_press: root.return_home()
+
+
+<FormLayout@BoxLayout>:
+    orientation: 'horizontal'
+    size_hint_y: None
+    height: 40
+    spacing: 10
+    padding: 5
+
+<FormLabel@Label>:
+    size_hint_x: 0.3
+    text_size: self.size
+    halign: 'right'
+    valign: 'middle'

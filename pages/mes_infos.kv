@@ -1,0 +1,185 @@
+#:kivy 2.2.1
+
+<InfoLabel@Label>:
+    size_hint_x: None
+    width: 200
+    text_size: self.size
+    halign: 'right'
+    valign: 'middle'
+
+<InfoValue@Label>:
+    text_size: self.size
+    halign: 'left'
+    valign: 'middle'
+    size_hint_x: 1
+
+<MesInfosPage>:
+    # Adding explicit references for all widgets
+    info_nom: nom
+    info_prenom: prenom
+    info_adresse: adresse
+    info_CP: CP
+    info_pays: pays
+    info_email: email
+    info_telephone: telephone
+    info_nsiret: nsiret
+    info_codeape: codeape
+    info_nss: nss
+    info_ntva: ntva
+    info_rib: rib
+    info_iban: iban
+    info_bic: bic
+    info_activite_principal: activite_principal
+    info_echeance_declaration: echeance_declaration
+    info_dernier_numero_facture: dernier_numero_facture
+
+    WindowFrame:
+        orientation: 'vertical'
+        padding: 20
+        spacing: 15
+
+        Label:
+            text: "Mes Informations"
+            font_size: 24
+            bold: True
+            size_hint_y: None
+            height: 40
+
+        ScrollView:
+            BoxLayout:
+                orientation: 'vertical'
+                spacing: 10
+                size_hint_y: None
+                height: self.minimum_height
+                padding: [10, 10]
+
+                GridLayout:
+                    cols: 2
+                    spacing: 10
+                    size_hint_y: None
+                    height: self.minimum_height
+                    row_default_height: 30
+
+                    InfoLabel:
+                        text: "Nom:"
+                    InfoValue:
+                        id: nom
+                        text: ""
+
+                    InfoLabel:
+                        text: "Prénom:"
+                    InfoValue:
+                        id: prenom
+                        text: ""
+
+                    InfoLabel:
+                        text: "Adresse:"
+                    InfoValue:
+                        id: adresse
+                        text: ""
+
+                    InfoLabel:
+                        text: "CP et Ville:"
+                    InfoValue:
+                        id: CP
+                        text: ""
+
+                    InfoLabel:
+                        text: "Pays:"
+                    InfoValue:
+                        id: pays
+                        text: ""
+
+                    InfoLabel:
+                        text: "Email:"
+                    InfoValue:
+                        id: email
+                        text: ""
+
+                    InfoLabel:
+                        text: "Téléphone:"
+                    InfoValue:
+                        id: telephone
+                        text: ""
+
+                    InfoLabel:
+                        text: "N° SIRET:"
+                    InfoValue:
+                        id: nsiret
+                        text: ""
+
+                    InfoLabel:
+                        text: "Code APE:"
+                    InfoValue:
+                        id: codeape
+                        text: ""
+
+                    InfoLabel:
+                        text: "N° SS:"
+                    InfoValue:
+                        id: nss
+                        text: ""
+
+                    InfoLabel:
+                        text: "N° TVA:"
+                    InfoValue:
+                        id: ntva
+                        text: ""
+
+                    InfoLabel:
+                        text: "RIB:"
+                    InfoValue:
+                        id: rib
+                        text: ""
+
+                    InfoLabel:
+                        text: "IBAN:"
+                    InfoValue:
+                        id: iban
+                        text: ""
+
+                    InfoLabel:
+                        text: "BIC:"
+                    InfoValue:
+                        id: bic
+                        text: ""
+
+                    InfoLabel:
+                        text: "Activité principale:"
+                    InfoValue:
+                        id: activite_principal
+                        text: ""
+
+                    InfoLabel:
+                        text: "Période de déclaration:"
+                    InfoValue:
+                        id: echeance_declaration
+                        text: ""
+
+                    InfoLabel:
+                        text: "Dernier numéro de facture:"
+                    InfoValue:
+                        id: dernier_numero_facture
+                        text: ""
+
+                BoxLayout:
+                    size_hint_y: None
+                    height: 30
+
+                BoxLayout:
+                    orientation: 'horizontal'
+                    spacing: 20
+                    size_hint_y: None
+                    height: 40
+                    padding: [10, 20]
+                    pos_hint: {'center_x': 0.5}
+
+                    OptionButton:
+                        text: "Modifier"
+                        size: 150, 40
+                        on_release: root.modifier_infos()
+
+                    OptionButton:
+                        text: "Retour"
+                        size: 150, 40
+                        on_release: root.manager.current = 'home'

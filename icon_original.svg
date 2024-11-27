@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+    <!-- Fond blanc -->
+    <rect width="1024" height="1024" fill="white"/>
+    
+    <!-- Groupe principal - logo + texte -->
+    <g transform="translate(112, 50) scale(0.78)">
+        <!-- Logo principal en bleu -->
+        <path d="M512 0C229.23 0 0 229.23 0 512s229.23 512 512 512 512-229.23 512-512S794.77 0 512 0zm0 960c-247.42 0-448-200.58-448-448S264.58 64 512 64s448 200.58 448 448-200.58 448-448 448z" 
+              fill="#0066CC"/>
+        
+        <!-- Segments circulaires -->
+        <path d="M512 128c-211.74 0-384 172.26-384 384s172.26 384 384 384 384-172.26 384-384-172.26-384-384-384zm0 704c-176.45 0-320-143.55-320-320s143.55-320 320-320 320 143.55 320 320-143.55 320-320 320z"
+              fill="#0066CC"/>
+              
+        <!-- Segment rouge -->
+        <path d="M765 512c0-35.35-28.65-64-64-64s-64 28.65-64 64 28.65 64 64 64 64-28.65 64-64z"
+              fill="#FF4444"/>
+    </g>
+    
+    <!-- Texte "PicoCompta" -->
+    <text x="512" y="900" 
+          font-family="Arial, sans-serif" 
+          font-size="100" 
+          font-weight="bold"
+          fill="#0066CC" 
+          text-anchor="middle"
+          dominant-baseline="middle">
+        PicoCompta
+    </text>
+</svg>

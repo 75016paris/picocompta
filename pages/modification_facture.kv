@@ -1,0 +1,119 @@
+<ModificationFacturePage>:
+    WindowFrame:
+        orientation: 'vertical'
+        padding: 20
+        spacing: 10
+
+        Label:
+            text: "Modifier la Facture"
+            font_size: 24
+            bold: True
+            size_hint_y: None
+            height: 40
+
+        # Error message label
+        Label:
+            id: error_label
+            text: ""
+            color: 1, 0, 0, 1
+            size_hint_y: None
+            height: 30
+
+        ScrollView:
+            GridLayout:
+                cols: 1
+                spacing: 10
+                size_hint_y: None
+                height: self.minimum_height
+                padding: [0, 10]
+
+                FormLayout:
+                    FormLabel:
+                        text: 'Client:'
+                    Spinner:
+                        id: client_spinner
+                        text: 'Sélectionner un client'
+                        values: []
+                        size_hint_y: None
+                        height: 40
+
+                FormLayout:
+                    FormLabel:
+                        text: 'Type de service:'
+                    Spinner:
+                        id: service_type_spinner
+                        text: 'Prestation'
+                        values: ['Prestation', 'Marchandise']
+                        on_text: root.on_service_type_change(self.text)
+                        size_hint_y: None
+                        height: 40
+
+                FormLayout:
+                    FormLabel:
+                        text: 'Description:'
+                    TextInput:
+                        id: mission_input
+                        hint_text: 'Description du service ou de la marchandise'
+                        multiline: True
+                        size_hint_y: None
+                        height: 60
+
+                FormLayout:
+                    FormLabel:
+                        text: 'TVA:'
+                    Spinner:
+                        id: tva_spinner
+                        text: 'Avec TVA'
+                        values: ['Avec TVA', 'Sans TVA']
+                        on_text: root.adjust_tva_rate()
+                        size_hint_y: None
+                        height: 40
+
+                FormLayout:
+                    FormLabel:
+                        text: 'Taux TVA (%):'
+                    TextInput:
+                        id: taux_tva_input
+                        text: '20.0'
+                        disabled: root.tva_status == 'Sans TVA'
+                        multiline: False
+                        size_hint_y: None
+                        height: 40
+
+                FormLayout:
+                    FormLabel:
+                        text: 'Prix HT:'
+                    TextInput:
+                        id: prix_ht_input
+                        hint_text: 'Prix HT'
+                        multiline: False
+                        on_text: root.calculate_tva(*args)
+                        size_hint_y: None
+                        height: 40
+
+                BoxLayout:
+                    orientation: 'vertical'
+                    size_hint_y: None
+                    height: 80
+                    Label:
+                        id: tva_label
+                        text: 'TVA: 0.00 €'
+                    Label:
+                        id: total_label
+                        text: 'Total TTC: 0.00 €'
+
+        BoxLayout:
+            size_hint_y: None
+            height: 50
+            spacing: 20
+            padding: [0, 10]
+
+            Button:
+                text: 'Mettre à jour'
+                size_hint_x: 0.5
+                on_press: root.generate_pdf()
+
+            Button:
+                text: 'Retour'
+                size_hint_x: 0.5
+                on_press: root.return_to_factures()

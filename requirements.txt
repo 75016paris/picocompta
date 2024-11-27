@@ -1,0 +1,2 @@
+Kivy==2.3.0
+reportlab==4.2.5

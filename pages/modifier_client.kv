@@ -1,0 +1,148 @@
+<ModifierClientPage>:
+    WindowFrame:
+        orientation: 'vertical'
+        padding: 20
+        spacing: 15
+
+        Label:
+            id: page_title
+            text: "Modifier Client"
+            font_size: 24
+            bold: True
+            size_hint_y: None
+            height: 40
+            color: primary_text_color
+
+        ScrollView:
+            BoxLayout:
+                orientation: 'vertical'
+                padding: 20
+                spacing: 20
+                size_hint_y: None
+                height: self.minimum_height
+
+                GridLayout:
+                    cols: 2
+                    spacing: 10
+                    size_hint_y: None
+                    height: self.minimum_height
+                    row_default_height: 40
+                    row_force_default: True
+
+                    Label:
+                        text: "Nom du Client:*"
+                        size_hint_x: None
+                        width: 200
+                        text_size: self.size
+                        halign: 'right'
+                        valign: 'middle'
+                    TextInput:
+                        id: nom
+                        hint_text: "Nom du Client"
+                        multiline: False
+                        size_hint_x: None
+                        width: 300
+
+                    Label:
+                        text: "Adresse:*"
+                        size_hint_x: None
+                        width: 200
+                        text_size: self.size
+                        halign: 'right'
+                        valign: 'middle'
+                    TextInput:
+                        id: adresse
+                        hint_text: "Adresse"
+                        multiline: True
+                        size_hint_x: None
+                        width: 300
+                        height: 60
+
+                    Label:
+                        text: "Code Postal et Ville:*"
+                        size_hint_x: None
+                        width: 200
+                        text_size: self.size
+                        halign: 'right'
+                        valign: 'middle'
+                    TextInput:
+                        id: cp
+                        hint_text: "Code Postal, et Ville"
+                        multiline: False
+                        size_hint_x: None
+                        width: 300
+
+                    Label:
+                        text: "Pays:*"
+                        size_hint_x: None
+                        width: 200
+                        text_size: self.size
+                        halign: 'right'
+                        valign: 'middle'
+                    TextInput:
+                        id: pays
+                        hint_text: "Pays"
+                        multiline: False
+                        size_hint_x: None
+                        width: 300
+
+                    Label:
+                        text: "Email:"
+                        size_hint_x: None
+                        width: 200
+                        text_size: self.size
+                        halign: 'right'
+                        valign: 'middle'
+                    TextInput:
+                        id: email
+                        hint_text: "Email"
+                        multiline: False
+                        size_hint_x: None
+                        width: 300
+
+                    Label:
+                        text: "N° TVA:"
+                        size_hint_x: None
+                        width: 200
+                        text_size: self.size
+                        halign: 'right'
+                        valign: 'middle'
+                    TextInput:
+                        id: ntva
+                        hint_text: "N° TVA"
+                        multiline: False
+                        size_hint_x: None
+                        width: 300
+
+                    Label:
+                        text: "N° de Siret:"
+                        size_hint_x: None
+                        width: 200
+                        text_size: self.size
+                        halign: 'right'
+                        valign: 'middle'
+                    TextInput:
+                        id: nsiret
+                        hint_text: "N° Siret"
+                        multiline: False
+                        size_hint_x: None
+                        width: 300
+
+                BoxLayout:
+                    orientation: 'horizontal'
+                    size_hint_y: None
+                    height: 80
+                    padding: [0, 20]
+                    spacing: 20
+                    pos_hint: {'center_x': 0.5}
+
+                    OptionButton:
+                        id: save_button
+                        text: "Mettre à jour"
+                        size: 150, 40
+                        on_release: root.save_client()
+
+                    OptionButton:
+                        text: "Annuler"
+                        size: 150, 40
+                        on_release: root.return_to_clients()

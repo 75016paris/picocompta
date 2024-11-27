@@ -1,0 +1,135 @@
+#:import get_color_from_hex kivy.utils.get_color_from_hex
+
+<MesFacturesPage>:
+    WindowFrame:
+        orientation: 'vertical'
+        padding: 10
+        spacing: 10
+
+        # Header
+        Label:
+            text: 'Mes Factures'
+            font_size: 24
+            bold: True
+            size_hint_y: None
+            height: 40
+
+        # Sorting buttons
+        BoxLayout:
+            size_hint_y: None
+            height: 40
+            spacing: 10
+            padding: 5
+
+            Label:
+                text: 'Trier par:'
+                size_hint_x: None
+                width: 60
+
+            SortButton:
+                text: 'Client'
+                on_release: root.trier_par('client')
+
+            SortButton:
+                text: 'Montant HT'
+                on_release: root.trier_par('montant_ht')
+
+            SortButton:
+                text: 'Montant Total'
+                on_release: root.trier_par('montant_total')
+
+            SortButton:
+                text: 'Status'
+                on_release: root.trier_par('status')
+
+            SortButton:
+                text: 'Date'
+                on_release: root.trier_par('date')
+
+        # Column headers
+        BoxLayout:
+            size_hint_y: None
+            height: 30
+            padding: 5
+            canvas.before:
+                Color:
+                    rgba: popup_title_bg_color
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+
+            Label:
+                text: 'Client'
+                size_hint_x: 0.15
+                bold: True
+            Label:
+                text: 'Type Activité'
+                size_hint_x: 0.15
+                bold: True
+            Label:
+                text: 'Date'
+                size_hint_x: 0.15
+                bold: True
+            Label:
+                text: 'Montant HT'
+                size_hint_x: 0.1
+                bold: True
+            Label:
+                text: 'TVA'
+                size_hint_x: 0.1
+                bold: True
+            Label:
+                text: 'Montant Total'
+                size_hint_x: 0.1
+                bold: True
+            Label:
+                text: 'Status'
+                size_hint_x: 0.1
+                bold: True
+            Label:
+                text: 'Actions'
+                size_hint_x: 0.15
+                bold: True
+
+        # Invoice list
+        ScrollView:
+            GridLayout:
+                id: factures_container
+                cols: 1
+                spacing: 2
+                size_hint_y: None
+                height: self.minimum_height
+
+        # Bottom buttons
+        BoxLayout:
+            size_hint_y: None
+            height: 50
+            spacing: 20
+            padding: [10, 10]
+            pos_hint: {'center_x': 0.5}
+
+            OptionButton:
+                text: 'Nouvelle Facture'
+                size: 150, 40
+                on_release: root.manager.current = 'nouvelle_facture'
+
+            OptionButton:
+                text: 'Retour'
+                size: 150, 40
+                on_release: root.manager.current = 'home'
+
+
+<FactureRow>:
+    orientation: 'horizontal'
+    size_hint_y: None
+    height: 40
+    padding: 5
+    spacing: 2
+    canvas.before:
+        Color:
+            rgba: self.background_color
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+    

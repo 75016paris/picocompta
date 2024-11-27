@@ -1,0 +1,68 @@
+<HomePage>:
+    WindowFrame:
+        orientation: 'vertical'
+        padding: 20
+        spacing: 15
+
+        Label:
+            text: "Menu Principal"
+            font_size: 24
+            bold: True
+            size_hint_y: None
+            height: 40
+
+        BoxLayout:
+            orientation: 'vertical'
+            spacing: 15
+            size_hint_y: None
+            height: self.minimum_height
+            pos_hint: {'center_x': 0.5}
+
+            OptionButton:
+                text: "Nouvelle Facture"
+                size: 200, 40
+                size_hint: None, None
+                pos_hint: {'center_x': 0.5}
+                on_release: root.manager.current = 'nouvelle_facture'
+
+            OptionButton:
+                text: "Nouveau Client"
+                size: 200, 40
+                size_hint: None, None
+                pos_hint: {'center_x': 0.5}
+                on_release: root.manager.current = 'nouveau_client'
+
+            OptionButton:
+                text: "URSSAF / TVA"
+                size: 200, 40
+                size_hint: None, None
+                pos_hint: {'center_x': 0.5}
+                on_release: root.manager.current = 'URSSAF_TVA'
+
+            OptionButton:
+                text: "Mes Factures"
+                size: 200, 40
+                size_hint: None, None
+                pos_hint: {'center_x': 0.5}
+                on_release: root.manager.current = 'mes_factures'
+
+            OptionButton:
+                text: "Mes Clients"
+                size: 200, 40
+                size_hint: None, None
+                pos_hint: {'center_x': 0.5}
+                on_release: root.manager.current = 'mes_clients'
+
+            OptionButton:
+                text: "Mes Infos"
+                size: 200, 40
+                size_hint: None, None
+                pos_hint: {'center_x': 0.5}
+                on_release: root.manager.current = 'mes_infos'
+
+            OptionButton:
+                text: "Retour"
+                size: 200, 40
+                size_hint: None, None
+                pos_hint: {'center_x': 0.5}
+                on_release: root.manager.current = 'demarrage'

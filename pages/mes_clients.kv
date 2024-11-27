@@ -1,0 +1,130 @@
+<ClientListItem@BoxLayout>:
+    canvas.before:
+        Color:
+            rgba: window_bg_color
+        Rectangle:
+            pos: self.pos
+            size: self.size
+        Color:
+            rgba: border_color
+        Line:
+            rectangle: self.x, self.y, self.width, self.height
+            
+    size_hint_y: None
+    height: 40
+    padding: 5
+    spacing: 2
+
+<SortButton@OptionButton>:
+    size: 120, 25
+    font_size: 11
+
+<MesClientsPage>:
+    WindowFrame:
+        orientation: 'vertical'
+        padding: 10
+        spacing: 10
+
+        # En-tête
+        Label:
+            text: 'Mes Clients'
+            font_size: 24
+            bold: True
+            size_hint_y: None
+            height: 40
+
+        # Boutons de tri
+        BoxLayout:
+            size_hint_y: None
+            height: 40
+            spacing: 10
+            padding: 5
+
+            Label:
+                text: 'Trier par:'
+                size_hint_x: None
+                width: 60
+
+            SortButton:
+                text: 'Nom'
+                on_release: root.trier_par('nom')
+
+            SortButton:
+                text: '1ère Facture'
+                on_release: root.trier_par('date')
+
+            SortButton:
+                text: 'CA N'
+                on_release: root.trier_par('ca_n')
+
+            SortButton:
+                text: 'CA Total'
+                on_release: root.trier_par('ca_total')
+
+            SortButton:
+                text: 'Impayés'
+                on_release: root.trier_par('impayes')
+
+        # En-têtes des colonnes
+        BoxLayout:
+            size_hint_y: None
+            height: 30
+            padding: 5
+            canvas.before:
+                Color:
+                    rgba: popup_title_bg_color
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+
+            Label:
+                text: 'Nom'
+                size_hint_x: 0.2
+                bold: True
+            Label:
+                text: '1ère Facture'
+                size_hint_x: 0.15
+                bold: True
+            Label:
+                text: 'CA N'
+                size_hint_x: 0.15
+                bold: True
+            Label:
+                text: 'CA Total'
+                size_hint_x: 0.15
+                bold: True
+            Label:
+                text: 'Impayés'
+                size_hint_x: 0.15
+                bold: True
+            Label:
+                text: 'Actions'
+                size_hint_x: 0.2
+                bold: True
+
+        # Liste des clients
+        ScrollView:
+            GridLayout:
+                id: clients_container
+                cols: 1
+                spacing: 2
+                size_hint_y: None
+                height: self.minimum_height
+
+        # Boutons du bas
+        BoxLayout:
+            size_hint_y: None
+            height: 50
+            spacing: 20
+            padding: [10, 10]
+            pos_hint: {'center_x': 0.5}
+
+            OptionButton:
+                text: 'Nouveau Client'
+                size: 150, 40
+                on_release: root.manager.current = 'nouveau_client'
+
+            OptionButton:
+                text: 'Retour'
+                size: 150, 40
+                on_release: root.manager.current = 'home'

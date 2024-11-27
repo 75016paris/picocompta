@@ -1,0 +1,327 @@
+#:kivy 2.0.0
+
+<ModifInscriptionPage>:
+    WindowFrame:
+        orientation: 'vertical'
+        padding: 10
+        spacing: 10
+
+        Label:
+            text: 'Modifier mes informations'
+            font_size: 24
+            bold: True
+            size_hint_y: None
+            height: 40
+            halign: 'center'
+
+        ScrollView:
+            size_hint: (1, 1)
+            bar_width: 10
+            do_scroll_x: False
+
+            BoxLayout:
+                orientation: 'vertical'
+                size_hint_y: None
+                height: self.minimum_height
+                spacing: 10
+                padding: 20
+
+                # Informations personnelles
+                Label:
+                    text: 'Informations personnelles'
+                    font_size: 18
+                    bold: True
+                    size_hint_y: None
+                    height: 25
+                    valign: 'bottom'
+
+                Label:
+                    text: 'Nom*'
+                    font_size: 14
+                    size_hint_y: None
+                    height: 20
+                    halign: 'left'
+
+                TextInput:
+                    id: nom
+                    hint_text: 'Nom'
+                    size_hint_y: None
+                    height: 40
+                    multiline: False
+
+                Label:
+                    text: 'Prénom*'
+                    font_size: 14
+                    size_hint_y: None
+                    height: 20
+                    halign: 'left'
+
+                TextInput:
+                    id: prenom
+                    hint_text: 'Prénom'
+                    size_hint_y: None
+                    height: 40
+                    multiline: False
+
+                Label:
+                    text: 'Adresse*'
+                    font_size: 14
+                    size_hint_y: None
+                    height: 20
+                    halign: 'left'
+
+                TextInput:
+                    id: adresse
+                    hint_text: 'Adresse'
+                    size_hint_y: None
+                    height: 40
+                    multiline: False
+
+                Label:
+                    text: 'Code Postal et ville*'
+                    font_size: 14
+                    size_hint_y: None
+                    height: 20
+                    halign: 'left'
+
+                TextInput:
+                    id: CP
+                    hint_text: 'Code Postal, ville'
+                    size_hint_y: None
+                    height: 40
+                    multiline: False
+
+                Label:
+                    text: 'Pays*'
+                    font_size: 14
+                    size_hint_y: None
+                    height: 20
+                    halign: 'left'
+
+                TextInput:
+                    id: pays
+                    hint_text: 'Pays'
+                    size_hint_y: None
+                    height: 40
+                    multiline: False
+
+                Label:
+                    text: 'Email*'
+                    font_size: 14
+                    size_hint_y: None
+                    height: 20
+                    halign: 'left'
+
+                TextInput:
+                    id: email
+                    hint_text: 'Email'
+                    size_hint_y: None
+                    height: 40
+                    multiline: False
+
+                Label:
+                    text: 'Téléphone*'
+                    font_size: 14
+                    size_hint_y: None
+                    height: 20
+                    halign: 'left'
+
+                TextInput:
+                    id: telephone
+                    hint_text: 'Téléphone'
+                    size_hint_y: None
+                    height: 40
+                    multiline: False
+
+                # Informations professionnelles
+                Label:
+                    text: 'Informations professionnelles'
+                    font_size: 18
+                    bold: True
+                    size_hint_y: None
+                    height: 25
+                    valign: 'bottom'
+
+                Label:
+                    text: 'Numéro de SIRET*'
+                    font_size: 14
+                    size_hint_y: None
+                    height: 20
+                    halign: 'left'
+
+                TextInput:
+                    id: nsiret
+                    hint_text: 'N° SIRET'
+                    size_hint_y: None
+                    height: 40
+                    multiline: False
+
+                Label:
+                    text: 'Code APE*'
+                    font_size: 14
+                    size_hint_y: None
+                    height: 20
+                    halign: 'left'
+
+                TextInput:
+                    id: codeape
+                    hint_text: 'Code APE'
+                    size_hint_y: None
+                    height: 40
+                    multiline: False
+
+                Label:
+                    text: 'Numéro de sécurité social'
+                    font_size: 14
+                    size_hint_y: None
+                    height: 20
+                    halign: 'left'
+
+                TextInput:
+                    id: nss
+                    hint_text: 'N° S.S.'
+                    size_hint_y: None
+                    height: 40
+                    multiline: False
+
+                Label:
+                    text: 'Numéro TVA'
+                    font_size: 14
+                    size_hint_y: None
+                    height: 20
+                    halign: 'left'
+
+                TextInput:
+                    id: ntva
+                    hint_text: 'Numéro TVA'
+                    size_hint_y: None
+                    height: 40
+                    multiline: False
+
+                # Informations bancaires
+                Label:
+                    text: 'Informations bancaires'
+                    font_size: 18
+                    bold: True
+                    size_hint_y: None
+                    height: 25
+                    valign: 'bottom'
+
+                Label:
+                    text: 'RIB*'
+                    font_size: 14
+                    size_hint_y: None
+                    height: 20
+                    halign: 'left'
+
+                TextInput:
+                    id: rib
+                    hint_text: 'RIB'
+                    size_hint_y: None
+                    height: 40
+                    multiline: False
+
+                Label:
+                    text: 'IBAN*'
+                    font_size: 14
+                    size_hint_y: None
+                    height: 20
+                    halign: 'left'
+
+                TextInput:
+                    id: iban
+                    hint_text: 'IBAN'
+                    size_hint_y: None
+                    height: 40
+                    multiline: False
+
+                Label:
+                    text: 'BIC*'
+                    font_size: 14
+                    size_hint_y: None
+                    height: 20
+                    halign: 'left'
+
+                TextInput:
+                    id: bic
+                    hint_text: 'BIC'
+                    size_hint_y: None
+                    height: 40
+                    multiline: False
+
+                # Paramètres d'activité
+                Label:
+                    text: 'Paramètres d\'activité*'
+                    font_size: 18
+                    bold: True
+                    size_hint_y: None
+                    height: 25
+                    valign: 'bottom'
+
+                Label:
+                    text: 'Type d\'activité'
+                    font_size: 14
+                    size_hint_y: None
+                    height: 20
+                    halign: 'left'
+
+                Spinner:
+                    id: activite_principal_spinner
+                    text: 'Sélectionner un Type d\'activité'
+                    values: ['BIC marchandise', 'BIC service', 'BNC']
+                    size_hint_y: None
+                    height: 40
+
+                Label:
+                    text: 'Période de Déclaration*'
+                    font_size: 14
+                    size_hint_y: None
+                    height: 20
+                    halign: 'left'
+
+                Spinner:
+                    id: echeance_declaration_spinner
+                    text: 'Sélectionner Trimestriel ou Mensuel'
+                    values: ['1 mois', '3 mois']
+                    size_hint_y: None
+                    height: 40
+
+                Label:
+                    text: 'Dernier numéro de facture déjà existante ?'
+                    font_size: 14
+                    size_hint_y: None
+                    height: 20
+                    halign: 'left'
+
+                TextInput:
+                    id: dernier_numero_facture
+                    hint_text: '0'
+                    size_hint_y: None
+                    height: 40
+                    multiline: False
+                    input_filter: 'int'
+
+                Widget:
+                    size_hint_y: None
+                    height: 20
+
+                BoxLayout:
+                    orientation: 'horizontal'
+                    size_hint_y: None
+                    height: 40
+                    spacing: 20
+                    padding: [20, 0]
+
+                    Button:
+                        text: 'Annuler'
+                        size_hint_x: 0.5
+                        on_release: app.root.current = 'mes_infos'
+
+                    Button:
+                        text: 'Mettre à jour'
+                        size_hint_x: 0.5
+                        on_release: root.save_info()
+                
+                Widget:
+                    size_hint_y: None
+                    height: 20
